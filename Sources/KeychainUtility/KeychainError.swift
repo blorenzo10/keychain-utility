@@ -7,7 +7,7 @@ public enum KeychainError: Error {
     case incorrectAttributeForClass
     case unexpected(OSStatus)
     
-    var description: String {
+    public var description: String {
         switch self {
         case .invalidData:
             return "Invalid data"
