@@ -166,77 +166,9 @@ public class KeychainManager {
     }
 }
 
-// MARK: - ItemClass
+// MARK: - Utils
 
-public extension KeychainManager {
-    enum ItemClass: RawRepresentable {
-        public typealias RawValue = CFString
-        
-        case generic
-        case password
-        case certificate
-        case cryptography
-        case identity
-        
-        public init?(rawValue: CFString) {
-            switch rawValue {
-            case kSecClassGenericPassword:
-                self = .generic
-            case kSecClassInternetPassword:
-                self = .password
-            case kSecClassCertificate:
-                self = .certificate
-            case kSecClassKey:
-                self = .cryptography
-            case kSecClassIdentity:
-                self = .identity
-            default:
-                return nil
-            }
-        }
-        
-        public var rawValue: CFString {
-            switch self {
-            case .generic:
-                return kSecClassGenericPassword
-            case .password:
-                return kSecClassInternetPassword
-            case .certificate:
-                return kSecClassCertificate
-            case .cryptography:
-                return kSecClassKey
-            case .identity:
-                return kSecClassIdentity
-            }
-        }
-    }
-}
-
-// MARK: - Errors
-
-public extension KeychainManager {
-    enum KeychainError: Error {
-        case invalidData
-        case itemNotFound
-        case duplicateItem
-        case incorrectAttributeForClass
-        case unexpected(OSStatus)
-        
-        var localizedDescription: String {
-            switch self {
-            case .invalidData:
-                return "Invalid data"
-            case .itemNotFound:
-                return "Item not found"
-            case .duplicateItem:
-                return "Duplicate Item"
-            case .incorrectAttributeForClass:
-                return "Incorrect Attribute for Class"
-            case .unexpected(let oSStatus):
-                return "Unexpected error - \(oSStatus)"
-            }
-        }
-    }
+private extension KeychainManager {
     
     private func convertError(_ error: OSStatus) -> KeychainError {
         switch error {
@@ -250,6 +182,7 @@ public extension KeychainManager {
             return .unexpected(error)
         }
     }
+
 }
 
 // MARK: - Dictionary
