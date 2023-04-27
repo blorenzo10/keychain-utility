@@ -40,4 +40,19 @@ public enum ItemClass: RawRepresentable, CaseIterable {
             return kSecClassIdentity
         }
     }
+    
+    public var name: String {
+        switch self {
+        case .generic:
+            return "Generic"
+        case .password:
+            return "Password"
+        case .certificate:
+            return "Certificate"
+        case .cryptography:
+            return "Cryptography"
+        case .identity:
+            return "Identity"
+        }
+    }
 }
