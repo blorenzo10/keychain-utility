@@ -1,12 +1,18 @@
 import Foundation
 
+/// Keychain class
 public enum ItemClass: RawRepresentable, CaseIterable {
     public typealias RawValue = CFString
     
+    /// Indicates a generic password item.
     case generic
+    /// Indicates an internet password
     case password
+    /// Indicates a certificate item
     case certificate
+    /// Indicates a cryptographic item
     case cryptography
+    /// Indicates an identity item
     case identity
     
     public init?(rawValue: CFString) {

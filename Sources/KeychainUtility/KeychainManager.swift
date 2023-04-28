@@ -1,11 +1,15 @@
 import Foundation
 
+/// Manager with all the necessary methods to interact with the keychain
 public class KeychainManager {
     
+    /// Shared instance to access the manager
     public static let shared = KeychainManager()
     
     public typealias KeychainDictionary = [String : Any]
     public typealias ItemAttributes = [CFString : Any]
+    
+    private init() {}
     
     /// Save any Encodable data into the keychain
     ///
