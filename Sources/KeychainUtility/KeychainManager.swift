@@ -13,7 +13,7 @@ public class KeychainManager {
     
     /// Save any Encodable data into the keychain
     ///
-    /// ```
+    /// ``` swift
     /// do {
     ///    let apiTokenAttributes: KeychainManager.ItemAttributes = [
     ///         kSecAttrLabel: "ApiToken"
@@ -52,7 +52,7 @@ public class KeychainManager {
     
     /// Retrieve a decodable item from the keychain
     ///
-    /// ```
+    /// ```swift
     /// do {
     ///    let apiTokenAttributes: KeychainManager.ItemAttributes = [
     ///         kSecAttrLabel: "ApiToken"
@@ -96,7 +96,7 @@ public class KeychainManager {
     
     /// Update an encodable item from the keychain
     ///
-    /// ```
+    /// ```swift
     /// do {
     ///    let apiTokenAttributes: KeychainManager.ItemAttributes = [
     ///         kSecAttrLabel: "ApiToken"
@@ -137,7 +137,7 @@ public class KeychainManager {
     
     /// Delete an item from the keychain
     ///
-    /// ```
+    /// ```swift
     /// do {
     ///    let apiTokenAttributes: KeychainManager.ItemAttributes = [
     ///         kSecAttrLabel: "ApiToken"
