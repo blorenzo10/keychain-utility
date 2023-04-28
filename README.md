@@ -4,7 +4,7 @@ Keychain Utility is a wrapper to help you interact with the Keychain APIs in an 
 
 # Documentation
 
-Check [Keychain Utility Documentation Page](https://blorenzo10.github.io/KeychainWrapper/documentation/keychainutility) for more info.
+Check [Keychain Utility Documentation Page](https://blorenzo10.github.io/keychain-utility/documentation/keychainutility/) for more info.
 
 # Installetion
 ## SwiftPM
