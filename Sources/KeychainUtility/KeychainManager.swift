@@ -3,13 +3,15 @@ import Foundation
 /// Manager with all the necessary methods to interact with the keychain
 public class KeychainManager {
     
-    /// Shared instance to access the manager
-    public static let shared = KeychainManager()
+    private var attributes: ItemAttributes?
     
-    public typealias KeychainDictionary = [String : Any]
-    public typealias ItemAttributes = [CFString : Any]
+    public class var standard: KeychainManager {
+        return KeychainManager()
+    }
     
-    private init() {}
+    public init(attributes: ItemAttributes? = nil) {
+        self.attributes = attributes
+    }
     
     /// Save any Encodable data into the keychain
     ///
@@ -31,8 +33,7 @@ public class KeychainManager {
     /// - Parameter itemClass: The item class
     /// - Parameter key: Key to identifiy the item
     /// - Parameter attributes: Optional dictionary with attributes to narrow the search
-    public func saveItem<T: Encodable>(_ item: T, itemClass: ItemClass, key: String, attributes: ItemAttributes? = nil) throws {
-        
+    public func saveItem<T: Encodable>(_ item: T, itemClass: ItemClass, key: String) throws {
         let itemData = try JSONEncoder().encode(item)
         var query: KeychainDictionary = [
             kSecClass as String: itemClass.rawValue,
@@ -69,7 +70,7 @@ public class KeychainManager {
     /// - Parameter key: Key to identifiy the item
     /// - Parameter attributes: Optional dictionary with attributes to narrow the search
     /// - Returns: An instance of type `T`
-    public func retrieveItem<T: Decodable>(ofClass itemClass: ItemClass, key: String, attributes: ItemAttributes? = nil) throws -> T {
+    public func retrieveItem<T: Decodable>(ofClass itemClass: ItemClass, key: String) throws -> T {
         var query: KeychainDictionary = [
             kSecClass as String: itemClass.rawValue,
             kSecAttrAccount as String: key as AnyObject,
@@ -113,7 +114,7 @@ public class KeychainManager {
     /// - Parameter itemClass: The item class
     /// - Parameter key: Key to identifiy the item
     /// - Parameter attributes: Optional dictionary with attributes to narrow the search
-    public func updateItem<T: Encodable>(with item: T, ofClass itemClass: ItemClass, key: String, attributes: ItemAttributes? = nil) throws {
+    public func updateItem<T: Encodable>(with item: T, ofClass itemClass: ItemClass, key: String) throws {
         var query: KeychainDictionary = [
             kSecClass as String: itemClass.rawValue,
             kSecAttrAccount as String: key as AnyObject,
@@ -153,7 +154,7 @@ public class KeychainManager {
     /// - Parameter itemClass: The item class
     /// - Parameter key: Key to identifiy the item
     /// - Parameter attributes: Optional dictionary with attributes to narrow the search
-    public func deleteItem(ofClass itemClass: ItemClass, key: String, attributes: ItemAttributes? = nil) throws {
+    public func deleteItem(ofClass itemClass: ItemClass, key: String) throws {
         var query: KeychainDictionary = [
             kSecClass as String: itemClass.rawValue,
             kSecAttrAccount as String: key as AnyObject
@@ -187,14 +188,4 @@ private extension KeychainManager {
         }
     }
 
-}
-
-// MARK: - Dictionary
-
-extension KeychainManager.KeychainDictionary {
-    mutating func addAttributes(_ attributes: KeychainManager.ItemAttributes) {
-        for(key, value) in attributes {
-            self[key as String] = value
-        }
-    }
 }

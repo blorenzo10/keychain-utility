@@ -23,5 +23,8 @@ let package = Package(
         .target(
             name: "KeychainUtility",
             dependencies: []),
+        .testTarget(
+            name: "KeychainUtilityTests",
+            dependencies: ["KeychainUtility"]),
     ]
 )
